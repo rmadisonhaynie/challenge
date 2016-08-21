@@ -30,7 +30,11 @@ for rental in data["rentals"]
   price = (daysPrice + rental["distance"] * car["price_per_km"]);
   insurance = (price * 0.3 * 0.5).to_i;
   commission = {"insurance_fee"=> insurance, "assistance_fee"=> 100 * days, "drivy_fee"=> insurance - 100 * days};
-  rentalsOut.push({"id" => rental["id"], "price" => price, "commission" => commission});
+  rentalOut = {"id" => rental["id"], "price" => price, "options"=> {"deductible_reduction"=> 0},"commission" => commission};
+  if rental["deductible_reduction"]
+    rentalOut["options"]["deductible_reduction"] = 400 * days;
+  end
+  rentalsOut.push(rentalOut);
 end
 
 output = {"rentals" => rentalsOut};
