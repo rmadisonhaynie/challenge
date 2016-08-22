@@ -179,6 +179,6 @@ end
 output = {"rental_modifications" => rentalModsOut};
 output.to_json;
 
-outFile = File.new("myoutput.json", "w");
+outFile = File.new("output.json", "w");
 JSON.dump(output, outFile);
 outFile.close();
